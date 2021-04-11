@@ -6,8 +6,6 @@ var MAX_SPEED = 210
 var ACCELERATION = 1000
 var FRICTION = 600
 
-var target_position: Vector2 = Vector2.ZERO
-	
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
 	
@@ -31,3 +29,12 @@ func apply_friction(friction):
 		velocity -= velocity.normalized() * friction
 	else:
 		velocity = Vector2.ZERO
+
+
+func enable() -> void:
+	set_physics_process(true)
+	
+
+func disable() -> void:
+	set_physics_process(false)
+	velocity = Vector2.ZERO
