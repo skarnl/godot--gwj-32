@@ -3,10 +3,15 @@
 extends Node
 
 
+signal victory
+
+
 var Screens = {
 	MAIN_MENU = 'res://screens/main_menu.tscn',
 	GAME = 'res://screens/game/game.tscn',
 }
+
+
 
 
 enum GameState {
@@ -21,6 +26,11 @@ var _current_state: int = GameState.SPLASH setget _set_current_state
 var _previous_state: int
 
 
+const BASE_LEVELS_PATH = 'res://screens/game/'
+var current_level = -1
+var levels = ['level01.tscn', 'level02.tscn'] #, 'level03.tscn', 'etage_4.tscn']
+
+
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	
@@ -28,6 +38,18 @@ func _ready():
 func start_game():
 	transition_to(GameState.GAME)
 	
+
+func goto_next_level():
+	current_level += 1
+	
+	print('current_level = ', current_level)
+	
+	if current_level < levels.size():
+		# TODO: some kind of screen transition / animation
+		SceneLoader.goto_scene(BASE_LEVELS_PATH + levels[current_level])
+	else:
+		emit_signal('victory')
+
 
 # change the state to the next
 func transition_to(new_state: int) -> void:
@@ -39,7 +61,7 @@ func transition_to(new_state: int) -> void:
 		GameState.GAME:
 			if _current_state in [GameState.MAIN_MENU, GameState.SPLASH]:
 				_current_state = new_state
-				SceneLoader.goto_scene(Screens.GAME)
+				goto_next_level()
 				
 #			match new_state:
 #				GameState.PAUSED:
