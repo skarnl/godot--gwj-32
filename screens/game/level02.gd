@@ -1,51 +1,82 @@
 extends Node2D
 
-var LiveUp = preload('../../entities/1up.tscn')
-var Spike = preload('../../entities/spike.tscn')
-onready var item_layer = $ItemLayer
+var PlusPrefab = preload('../../entities/1up.tscn')
 
-var screen_size = Vector2.ZERO
-onready var items = $Items
+var score = 0
+var lives = 0
+
+
+var initial_plus_position = Vector2.ZERO
+var initial_player_position = Vector2.ZERO
+var plus_ref
 
 func _ready():
-	# setup kill zone
+	$Plus.connect('pickup', self, '_on_player_pickup_plus')
+	$KillZone.connect('body_entered', self, 'on_player_entered')
 	
-	spawn_items()
+	initial_plus_position = $Plus.position
+	initial_player_position = $Player.position
+	
+	plus_ref = $Plus
+	
+	set_process_input(false)
+	
+	
+func on_player_entered(body: CollisionObject2D) -> void:
+	if body and body.is_in_group('player'):
+		
+		print("HIT - lives = ", lives)
+		
+		if lives > 0:
+			lives = lives - 1
+			increase_score()
+		else:
+			score = 0
+			$HUD.reset_score()
+
+		print("HIT - lives = ", lives)
+
+		kill_player()
 	
 
-func spawn_items() -> void:
-	items.hide()
+func increase_score():
+	score += 1
 	
-	for cell in items.get_used_cells():
-		var id = items.get_cellv(cell)
-		var type = items.tile_set.tile_get_name(id)
-			
-		print(type)
-			
-		var pos = items.map_to_world(cell) + items.cell_size/2
-		match type:
-			'spike':
-				var s = Spike.instance()
-				s.position = pos
-				s.connect('hit_player', self, 'on_player_hit')
-			#  s.tile_size = items.cell_size
-				item_layer.add_child(s)
-			
-			'heal':
-				var s = LiveUp.instance()
-				s.position = pos
-				s.connect('hit_1up', self, 'on_player_pickup_1up')
-			#  s.tile_size = items.cell_size
-				item_layer.add_child(s)
-			
-			'player_spawn':
-				$Player.position = pos
-			#  $Player.tile_size = items.cell_siz;
+	$HUD.update_score(score)
 
-func on_player_hit() -> void:
-	print('palyer hit - die die die')
+	if score == 7:
+		$HUD.show_won()
+		set_process_input(true)
+
+
+func kill_player():
+	$Player.disable()
+	$Player.hide()
+	$HUD.show_died()
+	
+	yield(get_tree().create_timer(3.0), "timeout")
+	
+	$HUD.hide_died()
+	
+	$Player.position = initial_player_position
+	$Player.show()
+	$Player.enable()
+	
+	if plus_ref:
+		plus_ref.queue_free()
+	
+	plus_ref = PlusPrefab.instance()
+	plus_ref.position = initial_plus_position
+	plus_ref.connect('pickup', self, '_on_player_pickup_plus')
+	add_child(plus_ref)
 	
 
-func on_player_pickup_1up() -> void:
-	print('player pick 1up - increase lives')
-	
+func _on_player_pickup_plus() -> void:
+	print("before pickup - lives = ", lives)
+	lives += 1
+	print("after pickup - lives = ", lives)
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed():
+		Game.goto_next_level()

@@ -1,56 +1,15 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://screens/game/level02.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/dungeon_/dungeon_/dungeon_.png" type="Texture" id=2]
+[ext_resource path="res://entities/spike.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tilesets/walls.tres" type="TileSet" id=3]
 [ext_resource path="res://entities/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://gui/hud.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/1up.tscn" type="PackedScene" id=6]
 [ext_resource path="res://entities/diamond.tscn" type="PackedScene" id=7]
 
-[sub_resource type="TileSet" id=1]
-1/name = "heal"
-1/texture = ExtResource( 2 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 176, 112, 16, 16 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
-2/name = "player_spawn"
-2/texture = ExtResource( 2 )
-2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 176, 160, 16, 16 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape_one_way = false
-2/shape_one_way_margin = 0.0
-2/shapes = [  ]
-2/z_index = 0
-3/name = "spike"
-3/texture = ExtResource( 2 )
-3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 176, 64, 16, 16 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 0, 0 )
-3/navigation_offset = Vector2( 0, 0 )
-3/shape_offset = Vector2( 0, 0 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape_one_way = false
-3/shape_one_way_margin = 0.0
-3/shapes = [  ]
-3/z_index = 0
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 108, 155 )
 
 [node name="Level02" type="Node2D"]
 script = ExtResource( 1 )
@@ -59,21 +18,39 @@ script = ExtResource( 1 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 format = 1
+tile_data = PoolIntArray( 917513, 0, 10, 917514, 0, 196609, 917515, 0, 196609, 917516, 0, 196609, 917517, 0, 196609, 917518, 0, 196609, 917519, 0, 196609, 917520, 0, 196609, 917521, 0, 196609, 917522, 0, 196609, 917523, 0, 196609, 917524, 0, 196609, 917525, 0, 196609, 917526, 0, 196609, 917527, 0, 196609, 917528, 0, 12, 917534, 0, 10, 917535, 0, 196609, 917536, 0, 196609, 917537, 0, 196609, 917538, 0, 196609, 917539, 0, 196609, 917540, 0, 196609, 917541, 0, 196609, 917542, 0, 196609, 917543, 0, 196609, 917544, 0, 196609, 917545, 0, 196609, 917546, 0, 12, 983049, 0, 65539, 983064, 0, 65539, 983070, 0, 65539, 983082, 0, 65539, 1048585, 0, 65539, 1048600, 0, 65539, 1048606, 0, 65539, 1048618, 0, 65539, 1114121, 0, 65539, 1114136, 0, 65539, 1114142, 0, 65539, 1114154, 0, 65539, 1179657, 0, 65539, 1179672, 0, 65539, 1179678, 0, 65539, 1179690, 0, 65539, 1245193, 0, 65539, 1245208, 0, 65539, 1245214, 0, 65539, 1245226, 0, 65539, 1310729, 0, 65539, 1310744, 0, 65539, 1310750, 0, 65539, 1310762, 0, 65539, 1376265, 0, 65539, 1376280, 0, 65539, 1376286, 0, 65539, 1376298, 0, 65539, 1441801, 0, 65539, 1441816, 0, 65539, 1441822, 0, 65539, 1441834, 0, 65539, 1507337, 0, 65539, 1507352, 0, 65539, 1507358, 0, 65539, 1507370, 0, 65539, 1572873, 0, 65539, 1572888, 0, 131082, 1572889, 0, 196609, 1572890, 0, 196609, 1572891, 0, 196609, 1572892, 0, 196609, 1572893, 0, 196609, 1572894, 0, 131084, 1572906, 0, 65539, 1638409, 0, 65539, 1638442, 0, 65539, 1703945, 0, 65539, 1703978, 0, 65539, 1769481, 0, 65539, 1769514, 0, 65539, 1835017, 0, 65539, 1835050, 0, 65539, 1900553, 0, 131082, 1900554, 0, 196609, 1900555, 0, 196609, 1900556, 0, 196609, 1900557, 0, 196609, 1900558, 0, 196609, 1900559, 0, 196609, 1900560, 0, 196609, 1900561, 0, 196609, 1900562, 0, 196609, 1900563, 0, 196609, 1900564, 0, 196609, 1900565, 0, 196609, 1900566, 0, 196609, 1900567, 0, 196609, 1900568, 0, 196609, 1900569, 0, 196609, 1900570, 0, 196609, 1900571, 0, 196609, 1900572, 0, 196609, 1900573, 0, 196609, 1900574, 0, 196609, 1900575, 0, 196609, 1900576, 0, 196609, 1900577, 0, 196609, 1900578, 0, 196609, 1900579, 0, 196609, 1900580, 0, 196609, 1900581, 0, 196609, 1900582, 0, 196609, 1900583, 0, 196609, 1900584, 0, 196609, 1900585, 0, 196609, 1900586, 0, 131084 )
 
-[node name="Items" type="TileMap" parent="."]
-tile_set = SubResource( 1 )
-cell_size = Vector2( 16, 16 )
-format = 1
+[node name="Spikes" parent="." instance=ExtResource( 2 )]
+position = Vector2( 496, 399 )
 
-[node name="ItemLayer" type="Node2D" parent="."]
+[node name="Spikes2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 496, 419 )
+
+[node name="Spikes3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 496, 439 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 380.253, 381.793 )
+position = Vector2( 439, 432 )
+
+[node name="Plus" parent="." instance=ExtResource( 6 )]
+position = Vector2( 252, 310 )
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 
-[node name="Diamond" parent="." instance=ExtResource( 7 )]
-position = Vector2( 744, 294 )
+[node name="KillZone" type="Area2D" parent="."]
 
-[node name="Plus" parent="." instance=ExtResource( 6 )]
-position = Vector2( 266, 266 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+position = Vector2( 609, 365 )
+shape = SubResource( 2 )
+
+[node name="Diamond" parent="." instance=ExtResource( 7 )]
+position = Vector2( 195, 431 )
+
+[node name="Diamond2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 358, 268 )
+
+[node name="Diamond3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 641, 273 )
+
+[node name="Diamond4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 637, 434 )
