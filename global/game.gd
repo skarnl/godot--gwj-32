@@ -27,7 +27,7 @@ var _previous_state: int
 
 
 const BASE_LEVELS_PATH = 'res://levels/'
-var current_level = -1
+var current_level = 1
 var levels = ['level01.tscn', 'level02.tscn', 'level03.tscn'] #, 'level03.tscn', 'etage_4.tscn']
 
 
