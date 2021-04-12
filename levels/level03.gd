@@ -1,6 +1,6 @@
 extends Node2D
 
-var PlusPrefab = preload('../../entities/1up.tscn')
+var PlusPrefab = preload('../entities/plus.tscn')
 
 var score = 0
 

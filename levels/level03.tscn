@@ -5,7 +5,7 @@
 [ext_resource path="res://tilesets/walls.tres" type="TileSet" id=3]
 [ext_resource path="res://entities/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://gui/hud.tscn" type="PackedScene" id=5]
-[ext_resource path="res://entities/1up.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/plus.tscn" type="PackedScene" id=6]
 [ext_resource path="res://entities/diamond.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
