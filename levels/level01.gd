@@ -13,8 +13,6 @@ func _ready():
 	$Diamond6.connect('pickup', self, 'on_diamond_pickup')
 	$Diamond7.connect('pickup', self, 'on_diamond_pickup')
 	
-	$HUD.connect('continue', self, 'on_press_continue')
-	
 	set_process_input(false)
 
 func on_diamond_pickup() -> void:

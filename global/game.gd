@@ -26,9 +26,9 @@ var _current_state: int = GameState.SPLASH setget _set_current_state
 var _previous_state: int
 
 
-const BASE_LEVELS_PATH = 'res://screens/game/'
+const BASE_LEVELS_PATH = 'res://levels/'
 var current_level = -1
-var levels = ['level01.tscn', 'level02.tscn'] #, 'level03.tscn', 'etage_4.tscn']
+var levels = ['level01.tscn', 'level02.tscn', 'level03.tscn'] #, 'level03.tscn', 'etage_4.tscn']
 
 
 func _ready():
@@ -48,7 +48,7 @@ func goto_next_level():
 		# TODO: some kind of screen transition / animation
 		SceneLoader.goto_scene(BASE_LEVELS_PATH + levels[current_level])
 	else:
-		emit_signal('victory')
+		transition_to(GameState.MAIN_MENU)
 
 
 # change the state to the next
