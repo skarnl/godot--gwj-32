@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://levels/level02.gd" type="Script" id=1]
 [ext_resource path="res://entities/spike.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tilesets/walls.tres" type="TileSet" id=3]
 [ext_resource path="res://entities/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://gui/hud.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/diamond.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 108, 155 )
@@ -37,3 +38,18 @@ position = Vector2( 439, 432 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 position = Vector2( 609, 365 )
 shape = SubResource( 1 )
+
+[node name="Diamond" parent="." instance=ExtResource( 7 )]
+position = Vector2( 356, 269 )
+
+[node name="Diamond2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 186, 268 )
+
+[node name="Diamond3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 185, 431 )
+
+[node name="Diamond4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 359, 435 )
+
+[node name="Diamond7" parent="." instance=ExtResource( 7 )]
+position = Vector2( 593, 359 )
