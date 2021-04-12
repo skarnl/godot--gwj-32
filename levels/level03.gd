@@ -10,16 +10,24 @@ var initial_player_position = Vector2.ZERO
 var plus_ref
 
 func _ready():
-	$Plus.connect('pickup', self, '_on_player_pickup_plus')
 	$KillZone.connect('body_entered', self, 'on_player_entered')
 	
 	initial_plus_position = $Plus.position
 	initial_player_position = $Player.position
 	
-	plus_ref = $Plus
+	$Plus.queue_free()
+	
+	add_plus()
 	
 	set_process_input(false)
-	
+
+func add_plus() -> void:
+	if plus_ref == null:
+		plus_ref = PlusPrefab.instance()
+		plus_ref.position = initial_plus_position
+		plus_ref.connect('pickup', self, '_on_player_pickup_plus')
+		add_child(plus_ref)
+
 	
 func on_player_entered(body: CollisionObject2D) -> void:
 	if body and body.is_in_group('player'):
@@ -45,22 +53,16 @@ func kill_player():
 	
 	$HUD.hide_died()
 	
+	add_plus()
+	
 	$Player.position = initial_player_position
 	$Player.show()
 	$Player.enable()
 	
-	if plus_ref:
-		plus_ref.queue_free()
-	
-	plus_ref = PlusPrefab.instance()
-	plus_ref.position = initial_plus_position
-	plus_ref.connect('pickup', self, '_on_player_pickup_plus')
-	add_child(plus_ref)
-	
 
 func _on_player_pickup_plus() -> void:
-	increase_score()
 	plus_ref = null
+	increase_score()
 
 
 func _input(event: InputEvent) -> void:
