@@ -60,6 +60,7 @@ func kill_player():
 
 func _on_player_pickup_plus() -> void:
 	increase_score()
+	plus_ref = null
 
 
 func _input(event: InputEvent) -> void:
